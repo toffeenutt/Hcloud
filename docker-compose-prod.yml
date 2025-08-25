@@ -1,0 +1,8 @@
+services:
+  backend:
+    build: ./web
+    ports:
+      - "3000:3000"
+    volumes:
+      # Specify the path to use as the root of the storage before the colon (:).
+      - /mnt:/storage
