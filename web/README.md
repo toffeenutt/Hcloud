@@ -2,24 +2,24 @@
 ### For deployment
 ```bash
 # build
-docker compose -f docker-compose-deploy.yml build
+docker compose --profile deploy build
 
 # run
-docker compose -f docker-compose-deploy.yml up
+docker compose --profile deploy up
 
 # build and run
-docker compose -f docker-compose-deploy.yml up --build
+docker compose --profile deploy up --build
 ```
 ### For development
 ```bash
 # run
-docker compose up
+docker compose --profile dev up
 
 # build and run (When you modify the Dockerfile or install a new package)
-docker compose up --build
+docker compose --profile dev up --build
 ```
 
 ### Install new pacakge
 ```bash
-docker compose run --rm <frontend/backend> npm install <package>
+docker compose run --rm <frontend-dev/backend-dev> npm install <package>
 ```

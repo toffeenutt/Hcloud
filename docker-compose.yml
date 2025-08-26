@@ -1,17 +1,32 @@
-# docker-compose for development environment
 services:
-  frontend:
+# service for deployment
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile-deploy
+    profiles: ["deploy"]
+    ports:
+      - "3000:3000"
+    volumes:
+      # Specify the path to use as the root of the storage before the colon (:).
+      - /mnt:/storage
+
+# service for development
+  frontend-dev:
     build: ./web/frontend
+    profiles: ["dev"]
     ports:
       - "5173:5173"
     volumes:
       - ./web/frontend:/app
       - /app/node_modules
-  backend:
+
+  backend-dev:
     command: npm run dev
     build: 
       context: ./web
       dockerfile: Dockerfile-dev
+    profiles: ["dev"]
     ports:
       - "3000:3000"
     volumes:
