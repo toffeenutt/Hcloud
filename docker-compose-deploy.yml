@@ -1,6 +1,8 @@
 services:
   backend:
-    build: ./web
+    build:
+      context: ./web
+      dockerfile: Dockerfile-deploy
     ports:
       - "3000:3000"
     volumes:
