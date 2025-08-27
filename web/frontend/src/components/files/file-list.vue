@@ -2,8 +2,11 @@
 import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
-const files = ref([]);
+import File from './item.vue';
+
 const route = useRoute();
+
+const files = ref([]);
 
 async function fetchFiles() {
   let url = '/api/files';
@@ -18,19 +21,26 @@ onMounted(() => {
 });
 
 watch(()=>route.params, fetchFiles);
-
 </script>
 
 <template>
   <ul>
-    <li v-for="dir of files.directories">
+<!--     <li v-for="dir of files.directories"
+    :aria-selected="isSelected"
+    draggable="true">
       <RouterLink :to="{ name: 'FileList', params: { file_path: [...$route.params.file_path, dir.name] }}">{{ dir.name }}</RouterLink>
-    </li>
+      <p>{{ dir.name }}</p>
+      <p>-</p>
+    </li> -->
+    <File v-for="dir of files.directories" :item="dir" />
   </ul>
   <ul>
-    <li v-for="file of files.files">
-      <p>{{ file.name }}</p>
-      <p>{{ file.size }}</p>
-    </li>
+    <File v-for="file of files.files" :item="file" />
   </ul>
 </template>
+
+<style scoped>
+ul {
+  list-style-type: none;
+}
+</style>
