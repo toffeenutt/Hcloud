@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile-deploy
     profiles: ["deploy"]
     ports:
-      - "3000:3000"
+      - "8989:3000"
     volumes:
       # Specify the path to use as the root of the storage before the colon (:).
       - /mnt:/storage
