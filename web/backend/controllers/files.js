@@ -7,7 +7,7 @@ files를 model로 분리 할 것
 async function getFiles (req, res, next) {
   const file_path = path.join('/storage', decodeURIComponent(req.path));
   //console.log(file_path);
-  let files = {
+  let items = {
     directories: [],
     files: []
   };
@@ -17,11 +17,11 @@ async function getFiles (req, res, next) {
     for (const filename of filenames) {
       const stat = await fs.stat(path.join(file_path, filename));
       if (stat.isDirectory()) {
-        files.directories.push({
+        items.directories.push({
           name: filename
         });
       } else {
-        files.files.push({
+        items.files.push({
           name: filename,
           size: stat.size
         });
@@ -39,7 +39,7 @@ async function getFiles (req, res, next) {
     return;
   }
 
-  res.json(files);
+  res.json(items);
 }
 
 module.exports = {
