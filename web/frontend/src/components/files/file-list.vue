@@ -1,10 +1,11 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 import File from './item.vue';
 
 const route = useRoute();
+const router = useRouter();
 
 const files = ref([]);
 
@@ -16,6 +17,13 @@ async function fetchFiles() {
   files.value = await fetch(url).then(res=>res.json());
 }
 
+function goParent() {
+  if (route.params.file_path) {
+    const newPath = route.params.file_path.slice(0, -1);
+    router.push({ name: 'FileList', params: { file_path: newPath }});
+  }
+}
+
 onMounted(() => {
   fetchFiles();
 });
@@ -25,13 +33,12 @@ watch(()=>route.params, fetchFiles);
 
 <template>
   <ul>
-<!--     <li v-for="dir of files.directories"
-    :aria-selected="isSelected"
-    draggable="true">
-      <RouterLink :to="{ name: 'FileList', params: { file_path: [...$route.params.file_path, dir.name] }}">{{ dir.name }}</RouterLink>
-      <p>{{ dir.name }}</p>
-      <p>-</p>
-    </li> -->
+    <li
+    @dblclick="goParent"
+    style="user-select: none;"
+    >
+      ..
+    </li>
     <File v-for="dir of files.directories" :item="dir" />
   </ul>
   <ul>

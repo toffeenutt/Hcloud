@@ -1,5 +1,4 @@
 <script setup>
-import router from '@/router';
 import { ref } from 'vue';
 
 const props = defineProps({
@@ -13,10 +12,14 @@ const isSelected = ref(false);
   <li 
   @click="isSelected = !isSelected"
   :class="{ 'selected': isSelected }"
-  @dblclick="router.push({ name: 'FileList', params: { file_path: [...$route.params.file_path, item.name] }})"
+  @dblclick="$router.push({
+    name: 'FileList',
+    params: { file_path: [...$route.params.file_path, item.name] }
+    })"
+  draggable="true"
   >
     <span>{{ item.name }}</span>
-    <span>{{ item.size }}</span>
+    <span>{{ item.size || '-' }}</span>
   </li>
 </template>
 
