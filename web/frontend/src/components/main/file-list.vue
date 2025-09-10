@@ -7,20 +7,20 @@ import File from './item.vue';
 const route = useRoute();
 const router = useRouter();
 
-const files = ref([]);
+const items = ref([]);
 
 async function fetchFiles() {
   let url = '/api/files';
   if (route.params.file_path) {
     url += '/' + route.params.file_path.join('/'); 
   }
-  files.value = await fetch(url).then(res=>res.json());
+  items.value = await fetch(url).then(res=>res.json());
 }
 
 function goParent() {
   if (route.params.file_path) {
-    const newPath = route.params.file_path.slice(0, -1);
-    router.push({ name: 'FileList', params: { file_path: newPath }});
+    const new_path = route.params.file_path.slice(0, -1);
+    router.push({ name: 'FileManager', params: { file_path: new_path }});
   }
 }
 
@@ -37,17 +37,24 @@ watch(()=>route.params, fetchFiles);
     @dblclick="goParent"
     style="user-select: none;"
     >
-      ..
+      <span>..</span>
     </li>
-    <File v-for="dir of files.directories" :item="dir" />
+    <File v-for="dir of items.directories" :item="dir" />
   </ul>
   <ul>
-    <File v-for="file of files.files" :item="file" />
+    <File v-for="file of items.files" :item="file" />
   </ul>
 </template>
 
 <style scoped>
 ul {
   list-style-type: none;
+  padding: 0 1rem;
+}
+
+li {
+  border: 1px solid var(--color-primary);
+  padding: 0.8rem;
+  margin: -1px 0 0 0;
 }
 </style>

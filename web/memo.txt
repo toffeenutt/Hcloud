@@ -14,3 +14,6 @@ pip
 jwt vs session
 
 csrf token
+
+front
+/api/files 같은 경로 변수로 관리

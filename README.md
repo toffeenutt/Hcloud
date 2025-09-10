@@ -1,21 +1,25 @@
 ## Build and run
 ### For deployment
+#### build
 ```bash
-# build
 docker compose --profile deploy build
-
-# run
+```
+#### run
+```bash
 docker compose --profile deploy up
-
-# build and run
+```
+#### build and run
+```bash
 docker compose --profile deploy up --build
 ```
-### For development
-```bash
-# run
-docker compose --profile dev up
 
-# build and run (When you modify the Dockerfile or install a new package)
+### For development
+##### run
+```bash
+docker compose --profile dev up
+```
+#### build and run (When you modify the Dockerfile or install a new package)
+```bash
 docker compose --profile dev up --build
 ```
 

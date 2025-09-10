@@ -5,15 +5,15 @@ const props = defineProps({
   item: Object
 })
 
-const isSelected = ref(false);
+const is_selected = ref(false);
 </script>
 
 <template>
   <li 
-  @click="isSelected = !isSelected"
-  :class="{ 'selected': isSelected }"
+  @click="is_selected = !is_selected"
+  :class="{ 'selected': is_selected }"
   @dblclick="$router.push({
-    name: 'FileList',
+    name: 'FileManager',
     params: { file_path: [...$route.params.file_path, item.name] }
     })"
   draggable="true"

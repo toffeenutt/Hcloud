@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import FileList from '../components/files/file-list.vue'
+import FileManager from '../components/main/file-manager.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      redirect: { name: 'FileList', params: { file_path: [] } }
+      redirect: { name: 'FileManager', params: { file_path: [] } }
     },
     {
       path: '/files/:file_path*',
-      name: 'FileList',
-      component: FileList,
+      name: 'FileManager',
+      component: FileManager,
     },
   ],
 })

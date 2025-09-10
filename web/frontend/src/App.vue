@@ -1,8 +1,11 @@
 <script setup>
+  import Header from './components/header/header.vue';
+  import Main from './components/main/main.vue';
 </script>
 
 <template>
-  <RouterView />
+  <Header />
+  <Main />
 </template>
 
 <style scoped>
