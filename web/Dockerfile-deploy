@@ -22,6 +22,8 @@ RUN npm install
 COPY ./backend ./
 COPY --from=frontend_build /app/dist ./dist
 
+ENV STORAGE_ROOT=/storage
+
 EXPOSE 3000
 
 CMD ["npm", "start"]

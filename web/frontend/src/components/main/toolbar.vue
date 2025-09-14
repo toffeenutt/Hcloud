@@ -30,6 +30,7 @@ function uploadFiles() {
   <Icon icon="material-symbols:download" />
 
   <input
+  hidden
   type="file"
   ref="fileInput"
   @change="uploadFiles"

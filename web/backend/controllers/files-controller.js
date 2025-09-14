@@ -18,10 +18,9 @@ async function getFiles(req, res, next) {
 }
 
 async function postFiles(req, res, next) {
-  const file_path = path.join('/storage', decodeURIComponent(req.path));
-  console.log(file_path);
-  console.log(req.body);
-  /* todo */
+  const file_manager = new FileManagerModel(req.path);
+
+  file_manager.saveFiles(req.files);
 }
 
 module.exports = {
